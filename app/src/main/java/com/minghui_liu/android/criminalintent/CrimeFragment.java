@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.util.Date;
@@ -67,8 +66,11 @@ public class CrimeFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_delete_crime:
-                CrimeLab.get(getActivity()).deleteCrime(mCrime.getId());
-                getActivity().onBackPressed();
+                CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                Intent intent = new Intent(getActivity(), CrimeListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                getActivity().finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
